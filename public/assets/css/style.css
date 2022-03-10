@@ -1,0 +1,280 @@
+:root {
+  --speed: 5;
+}
+.machine {
+  background-color: peru;
+  border: dashed brown 3px;
+  height: 300px;
+  width: 900px;
+  margin: 50px;
+
+  z-index: 5;
+
+  display: flex;
+}
+
+.slot {
+  height: 250px;
+  width: 250px;
+  margin: 20px;
+
+  overflow: hidden;
+
+  z-index: 1;
+
+  background-color: beige;
+  border: solid darkblue 2px;
+  text-align: center;
+  font-size: 100pt;
+  line-height: 250px;
+}
+
+@media only screen and (max-width: 600px) {
+  .machine {
+    background-color: peru;
+    border: dashed brown 3px;
+    height: 65px;
+    width: 240px;
+    margin: 20px;
+  
+    z-index: 5;
+  
+    display: flex;
+  }
+  
+  .slot {
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+  
+    overflow: hidden;
+  
+    z-index: 1;
+  
+    background-color: beige;
+    border: solid darkblue 2px;
+    text-align: center;
+    font-size: 20pt;
+    line-height: 50px;
+  }
+}
+
+.slot > .value {
+  z-index: 3;
+  animation-name: slotspin;
+  animation-iteration-count: infinite;
+  animation-duration: calc(1s / var(--speed));
+}
+
+@keyframes slotspin {
+  0% {
+      transform: translateY(-200px);
+  }
+  100% {
+      transform: translateY(200px)
+  }
+}
+
+.main{
+  background:#000;
+  margin-top:100px;
+  height:80px;
+  width:250px;
+  display:inline-block;
+  text-align: center;
+}
+
+.box1, .box2, .box3{
+
+  display:inline-block;
+  width:80px;
+  height:80px;
+  background-image: linear-gradient(#222, #F0F0F0, #333);
+  border-radius:5px;
+  font-size:5em;
+  text-align: center;
+
+}
+
+.box1 div{
+    line-height: 80px;
+    height: 80px;
+    border-bottom:1px solid #000;
+    animation:scroll 8s infinite linear; 
+}
+
+.box2 div{
+    line-height: 80px;
+    height: 80px;
+    border-bottom:1px solid #000;
+    animation:scroll 8s infinite 0.11s linear; 
+}
+
+.box3 div{
+    line-height: 80px;
+    height: 80px;
+    border-bottom:1px solid #000;
+    animation:scroll 8s infinite 0.15s linear; 
+}
+
+@keyframes scroll {
+    from {
+      transform: translateY(-1400px);
+  }
+    to {
+      transform: translateY(0px);
+  }
+}
+
+@keyframes scroll1 {
+  from {
+    transform: translateY(-10px);
+}
+  to {
+    transform: translateY(-10px);
+}
+}
+
+
+
+
+
+
+.prize-back{
+	
+	background-image: linear-gradient(to bottom, #e3e3e300, #373636), 
+      url('https://i.postimg.cc/prQ3FZMt/property-6.jpg');
+	background-size: cover;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	height: 200px;
+	width: auto !important;
+	padding: 0px !important;
+	
+}
+
+.btn-secondary2{
+	color: #fff !important;
+	background-color: #5d5b5b !important;
+	border-color: #FFCB00 !important;
+	font-size: 11px !important;
+}
+
+
+.card-title{
+	color: #fff;
+}
+
+.dt-card{
+	border-radius: 1.4rem !important;
+	
+}
+
+.dt-reaponce{
+	width: 45%;
+	float: left;
+	margin: 20px;
+}
+
+
+
+
+.align-text-bottom{
+	
+	align-self: end !important;
+}
+
+
+.card-bak-hide{
+	background-color: #fff0 !important;
+}
+
+.dt-content{
+	padding: 2rem 0rem !important;
+}
+
+.col-md-12{
+	padding-right: 5px !important;
+	padding-left: 5px !important;
+	
+}
+.text-truncate{
+	white-space: normal !important;
+	flex: auto !important;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+	line-height: 1.0 !important;
+}
+.display-1 {
+  font-size: 18px !important;
+  line-height: initial !important;
+}
+.wrapper {
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 50px;
+    box-shadow: -2px -2px 5px #f3efef;
+	z-index: 1000;
+
+}
+
+.icon {
+  width: 30px;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  width: 100%;
+  cursor: pointer;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f7f5f5;
+}
+
+.section:hover {
+  background-color: #81d4fa;
+  box-shadow: -2px -2px 10px lightgrey;
+}
+
+.nav-link-mobile{
+	
+	font-size:18px !important;
+	Color:#000 !important;
+}
+
+
+
+
+
+
+
+
+.text {
+  font-family: arial;
+  padding: 25px;
+}
+
+
+
+@media screen and (max-width: 810px) {
+  .dt-reaponce{
+	width: 100%;
+	float: unset;
+	margin: auto;
+}
+}
+
+
+/* .box1:hover div, .box2:hover div, .box3:hover div{
+  animation-play-state: paused;
+}

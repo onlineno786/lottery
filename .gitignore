@@ -1,0 +1,10 @@
+# node modules
+node_modules/
+
+# lock files
+yarn.lock
+package-lock.json
+
+# config files
+.env
+app/config/config.development.js

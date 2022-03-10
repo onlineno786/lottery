@@ -1,0 +1,147 @@
+<!-- Grid Item -->
+<div class="col-xl-12 mb-5">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>{{ prize.prize.name }}.</h1>
+  </div>
+</div>
+
+<div class="col-xl-12 col-md-12 order-xl-1" ng-if="!main.authorized">
+
+  <!-- Card -->
+  <div class="dt-card bg-success text-white" ng-if="prize.purchase">
+
+    <!-- Card Header -->
+    <div class="dt-card__header pt-6 px-6 mb-8 pb-5">
+
+      <!-- Card Heading -->
+      <div class="dt-card__heading">
+        <h3 class="dt-card__title text-white">Congratulations!!!!! You have purchased the ticket. Go to my tickets
+          section to see your code.</h3>
+      </div>
+      <!-- /card heading -->
+
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="dt-card bg-success text-white" ng-if="prize.errorMsg">
+
+    <!-- Card Header -->
+    <div class="dt-card__header pt-6 px-6 mb-8 pb-5">
+
+      <!-- Card Heading -->
+      <div class="dt-card__heading">
+        <h3 class="dt-card__title text-white">Congratulations!!!!! {{ prize.errorMsg }}</h3>
+      </div>
+      <!-- /card heading -->
+
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="dt-card bg-success text-white" ng-if="!prize.purchase && !prize.errorMsg">
+
+    <!-- Card Header -->
+    <div class="dt-card__header pt-6 px-6 mb-4">
+
+      <!-- Card Heading -->
+      <div class="dt-card__heading">
+        <h3 class="dt-card__title text-white">{{ prize.prize.name }}</h3>
+      </div>
+      <!-- /card heading -->
+
+    </div>
+    <!-- /card header -->
+
+    <!-- Card Body -->
+    <div class="dt-card__body px-6">
+      <!-- Grid -->
+      <div class="row no-gutters">
+        <!-- Grid Item -->
+        <div class="col-6 pr-2 border-right">
+          <div class="display-1 font-weight-500 mb-3">
+            ₹ {{ prize.prize.price }}<span class="d-inline-block f-14">/ticket</span>
+          </div>
+        </div>
+        <!-- /grid item -->
+        <!-- Grid Item -->
+        <div class="col-6 text-center">
+          <div class="mb-3">
+            <a href="#" ng-click="prize.purchaseNow()" class="btn btn-secondary btn-xs text-uppercase">Complete the
+              purchase now</a>
+          </div>
+        </div>
+        <!-- /grid item -->
+      </div>
+      <!-- /grid -->
+    </div>
+    <!-- /card body -->
+  </div>
+  <!-- /card -->
+
+</div>
+
+<div class="col-xl-12">
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Tab Content-->
+    <div class="tab-content">
+
+      <!-- Tab panel -->
+      <div id="popular" class="tab-pane active">
+
+        <!-- Card Body -->
+        <div class="card-body">
+
+          <!-- Card -->
+          <div class="card shadow-none horizontal rounded-0 pb-8 border-bottom"
+            ng-repeat="prizeData in prize.prize.prizes">
+
+            <!-- Card Stacked -->
+            <div class="card-stacked order-sm-1">
+
+              <!-- Card Body -->
+              <div class="card-body pt-sm-0 pb-0 px-0 pr-sm-6 pr-md-8">
+
+
+                <!-- Card Title-->
+                <h3 class="card-title font-weight-normal text-truncate">
+                  Prize #{{ $index + 1 }} - <b>{{ prizeData.title }}</b>
+                </h3>
+                <!-- Card Title-->
+
+                <!-- Card Sub Title-->
+                <h5 class="card-subtitle">{{ prizeData.description }}</h5>
+                <!-- /card sub title-->
+
+                <!-- Pricing -->
+                <div class="d-flex align-items-baseline price mb-1">
+                  <p class="d-block text-primary font-weight-500 display-5 mr-1">{{ prizeData.code
+                    }}</p>
+                  <br>
+                  <p class="d-inline-block text-light-gray f-12">to be revealed at {{
+                    prizeData.date | date : 'MMM d, y. h:mm a' }}</p>
+                </div>
+              </div>
+              <!-- /card body -->
+
+            </div>
+            <!-- /card stacked -->
+
+          </div>
+          <!-- /card -->
+        </div>
+        <!-- /card body -->
+
+      </div>
+      <!-- /tab panel -->
+
+    </div>
+    <!-- /tab content-->
+
+  </div>
+  <!-- /card -->
+
+</div>

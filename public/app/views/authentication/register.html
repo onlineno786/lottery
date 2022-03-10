@@ -1,0 +1,79 @@
+<!-- Login Container -->
+<div class="dt-login--container"
+    style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80');background-size: cover"
+    ng-show="main.home && !main.isLoggedIn">
+
+    <!-- Login Content -->
+    <div class="dt-login__content-wrapper">
+
+        <!-- Login Background Section -->
+        <div class="dt-login__bg-section">
+
+            <div class="dt-login__bg-content">
+                <!-- Login Title -->
+                <h1 class="dt-login__title">Login</h1>
+                <!-- /login title -->
+
+                <p class="f-16">Sign in and explore Dream Fullfill platform.</p>
+            </div>
+        </div>
+        <!-- /login background section -->
+
+        <!-- Login Content Section -->
+        <div class="dt-login__content">
+
+            <!-- Login Content Inner -->
+            <div class="dt-login__content-inner">
+
+                <!-- Form -->
+                <form ng-submit="main.doLogin(logData);">
+
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <label class="sr-only">Mobile Number</label>
+                        <input type="text" class="form-control" placeholder="Enter mobile number"
+                            ng-model="main.logData.mobileNumber" required>
+                    </div>
+                    <!-- /form group -->
+
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <label class="sr-only">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter Password"
+                            ng-model="main.logData.password" required>
+                    </div>
+                    <!-- /form group -->
+
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary text-uppercase">Login</button>
+                        <a href="/register" class="text-success ml-2">Not registered?</a>
+                    </div>
+                    <!-- /form group -->
+                </form>
+                <div class="text-center" ng-show="main.loading">
+                    <span class="glyphicon glyphicon-repeat spinner"></span>
+                    <p> Loading..... </p>
+                </div>
+
+                <div class="row show-hide-message">
+                    <div class="alert alert-success" ng-show="main.successMsg">
+                        <strong> Success! </strong> {{ main.successMsg  }}
+                    </div>
+                </div>
+
+                <div class="row show-hide-message">
+                    <div class="alert alert-danger" ng-show="main.errorMsg">
+                        <strong> Oops! </strong> {{ main.errorMsg  }}
+                    </div>
+                </div>
+                <!-- /form -->
+            </div>
+        </div>
+        <!-- /login content section -->
+
+    </div>
+    <!-- /login content -->
+
+</div>
+<!-- /login container -->

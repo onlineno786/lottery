@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Employee Acceleration Program">
+
+    <!-- Logo -->
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logo/logo.png" />
+
+    <title>Dream Fullfill</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+    <!-- Font Icon Styles -->
+    <link rel="stylesheet" href="/assets/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/assets/vendors/gaxon-icon/styles.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/style-about.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!-- /font icon Styles -->
+
+    <!-- Perfect Scrollbar stylesheet -->
+    <link rel="stylesheet" href="/assets/modules/perfect-scrollbar/css/perfect-scrollbar.css">
+    <!-- /perfect scrollbar stylesheet -->
+
+    <!-- Load Styles -->
+    <link rel="stylesheet" href="/assets/css/semidark-style-1.min.css">
+    <!-- /load styles -->
+
+    <!-- Load Styles -->
+    <link rel="stylesheet" href="/assets/modules/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/modules/chartist/dist/chartist.min.css">
+    <!-- /load styles -->
+
+    <!-- App config -->
+    <script src="/app/app.js"></script>
+    <script src="/app/routes.js"></script>
+
+    <!-- Angular Controller files -->
+    <script src="/app/controllers/mainCtrl.js"></script>
+    <script src="/app/controllers/userCtrl.js"></script>
+
+    <!-- Angular Filter -->
+    <script src="/app/filters/filter.js"></script>
+
+    <!-- Angular Directives -->
+    <script src="/app/directives/fileModel.js"></script>
+
+    <!-- Angular Services -->
+    <script src="/app/services/userServices.js"></script>
+    <script src="/app/services/authServices.js"></script>
+    <script src="/app/services/uploadFileService.js"></script>
+
+</head>
+
+<body ng-app="userApp" ng-controller="mainCtrl as main" class="dt-sidebar--fixed dt-header--fixed">
+
+    <!-- Loader -->
+    <div class="dt-loader-container">
+        <div class="dt-loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10">
+                </circle>
+            </svg>
+        </div>
+    </div>
+    <!-- /loader -->
+    <!-- Root -->
+    <div class="dt-root">
+        <div class="dt-root__inner">
+
+            <!-- Login Container -->
+            <div class="dt-login--container" ng-show="main.home && !main.isLoggedIn"
+                style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80');background-size: cover"
+                ng-show="main.home && !main.isLoggedIn">
+
+                <!-- Login Content -->
+                <div class="dt-login__content-wrapper">
+
+                    <!-- Login Background Section -->
+                    <div class="dt-login__bg-section">
+
+                        <div class="dt-login__bg-content">
+                            <!-- Login Title -->
+                            <h1 class="dt-login__title">Join</h1>
+                            <!-- /login title -->
+
+                            <p class="f-16">Join and explore Dream Fullfill platform.</p>
+                        </div>
+                    </div>
+                    <!-- /login background section -->
+
+                    <!-- Login Content Section -->
+                    <div class="dt-login__content">
+
+                        <!-- Login Content Inner -->
+                        <div class="dt-login__content-inner" ng-if="main.login">
+
+                            <!-- Form -->
+                            <form ng-submit="main.doLogin(logData);">
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Mobile Number</label>
+                                    <input type="text" class="form-control" placeholder="Enter mobile number"
+                                        ng-model="main.logData.mobileNumber" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password"
+                                        ng-model="main.logData.password" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary text-uppercase">Login</button>
+                                    <a href="#" class="text-success ml-2" ng-click="main.changeAuth()">Not
+                                        registered?</a>
+                                </div>
+                                <!-- /form group -->
+                            </form>
+                            <div class="text-center" ng-show="main.loading">
+                                <span class="glyphicon glyphicon-repeat spinner"></span>
+                                <p> Loading..... </p>
+                            </div>
+
+                            <div class="row show-hide-message">
+                                <div class="alert alert-success" ng-show="main.successMsg">
+                                    <strong> Success! </strong> {{ main.successMsg }}
+                                </div>
+                            </div>
+
+                            <div class="row show-hide-message">
+                                <div class="alert alert-danger" ng-show="main.errorMsg">
+                                    <strong> Oops! </strong> {{ main.errorMsg }}
+                                </div>
+                            </div>
+                            <!-- /form -->
+                        </div>
+
+                        <!-- Signup Content Inner -->
+                        <div class="dt-login__content-inner" ng-if="!main.login">
+
+                            <!-- Form -->
+                            <form ng-submit="main.doSignup(signupData);" ng-show="!main.successMsg">
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter your name"
+                                        ng-model="main.signupData.name" required>
+                                </div>
+                                <!-- /form group -->
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Mobile Number</label>
+                                    <input type="text" class="form-control" placeholder="Enter mobile number"
+                                        ng-model="main.signupData.mobileNumber" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password"
+                                        ng-model="main.signupData.password" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary text-uppercase">Signup</button>
+                                    <a href="#" class="text-success ml-2" ng-click="main.changeAuth()">Back to
+                                        login?</a>
+                                </div>
+                                <!-- /form group -->
+                            </form>
+                            <div class="text-center" ng-show="main.loading">
+                                <span class="glyphicon glyphicon-repeat spinner"></span>
+                                <p> Loading..... </p>
+                            </div>
+
+                            <div class="row show-hide-message">
+                                <div class="alert alert-success" ng-show="main.successMsg">
+                                    <strong> Success! </strong> {{ main.successMsg }}
+                                    <a href="#" class="text-success ml-2" ng-click="main.changeAuth()">Click here to
+                                        login now.</a>
+                                </div>
+                            </div>
+
+                            <div class="row show-hide-message">
+                                <div class="alert alert-danger" ng-show="main.errorMsg">
+                                    <strong> Oops! </strong> {{ main.errorMsg }}
+                                </div>
+                            </div>
+                            <!-- /form -->
+                        </div>
+                    </div>
+                    <!-- /login content section -->
+
+                </div>
+                <!-- /login content -->
+
+            </div>
+            <!-- /login container -->
+
+            <div ng-show="main.isLoggedIn">
+                <!-- Header -->
+                <header class="dt-header">
+
+                    <!-- Header container -->
+                    <div class="dt-header__container">
+
+                        <!-- Brand -->
+                        <div class="dt-brand">
+
+                            <!-- Brand tool -->
+                            <div class="dt-brand__tool" data-toggle="main-sidebar">
+                                <div class="hamburger-inner"></div>
+                            </div>
+                            <!-- /brand tool -->
+
+                            <!-- Brand logo -->
+                            <span class="dt-brand__logo">
+                                <a class="dt-brand__logo-link text-white" href="/">
+                                    Dream Fullfill
+                                </a>
+                            </span>
+                            <!-- /brand logo -->
+
+                        </div>
+                        <!-- /brand -->
+
+                        <!-- Header toolbar-->
+                        <div class="dt-header__toolbar">
+
+                            <!-- Header Menu Wrapper -->
+                            <div class="dt-nav-wrapper">
+
+                                <!-- Header Menu -->
+                                <!-- /header menu -->
+                            </div>
+                            <!-- Header Menu Wrapper -->
+                            <!-- /search box -->
+                        </div>
+
+
+                        <!-- Header toolbar-->
+                        <div class="dt-header__toolbar" ng-show="main.isLoggedIn">
+
+                            <!-- Header Menu Wrapper -->
+                            <div class="dt-nav-wrapper">
+
+                                <!-- Header Menu -->
+                                <ul class="dt-nav">
+                                    <li class="dt-nav__item dropdown">
+                                        <!-- Dropdown Link -->
+                                        <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img class="dt-avatar size-30" src="/assets/images/placeholder.jpg"
+                                                alt="User Profile Picture">
+                                            <span class="dt-avatar-info d-none d-sm-block">
+                                                <span class="dt-avatar-name">{{ main.name }}</span>
+                                            </span>
+                                        </a>
+                                        <!-- /dropdown link -->
+
+                                        <!-- Dropdown Option -->
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="/settings">
+                                                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Account Settings
+                                            </a>
+                                            <a class="dropdown-item" href="#" ng-click="main.logout();"> <i
+                                                    class="icon icon-logout icon-fw mr-2 mr-sm-1"></i>Logout
+                                            </a>
+                                        </div>
+                                        <!-- /dropdown option -->
+                                    </li>
+                                </ul>
+                                <!-- /header menu -->
+                            </div>
+                            <!-- Header Menu Wrapper -->
+                        </div>
+                        <!-- /header toolbar -->
+                    </div>
+                    <!-- /header container -->
+                </header>
+                <!-- /header -->
+                <!-- Site Main -->
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="wrapper">
+  <div class="section"><a href="/prizes" class="dt-side-nav__link nav-link-mobile" title="Metrics"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" xmlns:v="https://vecta.io/nano"><path d="M24.156 3.891a1.81 1.81 0 0 0-1.465-.73h-2.664l.27-1.59c.039-.234-.023-.473-.176-.656S19.738.629 19.5.629h-14c-.238 0-.465.105-.621.285s-.215.422-.176.656l.27 1.59H2.309c-.574 0-1.117.27-1.465.73S.391 4.953.551 5.504l.301 1.031a7.63 7.63 0 0 0 6.105 5.359 6.64 6.64 0 0 0 3.109 2.652l-.004.109c0 .32.082.641.238.922.18.246.391.473.629.668l-2.082 5.406H7.105c-.141 0-.27.078-.328.207l-.91 2.008a.35.35 0 0 0 .023.344c.063.102.176.16.297.16h12.625c.121 0 .234-.059.297-.16s.078-.23.023-.344l-.91-2.008c-.059-.125-.187-.207-.328-.207h-1.742L14.07 16.25c.238-.199.445-.426.629-.672.156-.281.238-.602.238-.922l-.004-.109a6.64 6.64 0 0 0 3.109-2.652c2.895-.465 5.27-2.547 6.105-5.355l.301-1.031a1.83 1.83 0 0 0-.293-1.617zM2.164 6.152l-.301-1.027c-.043-.141-.016-.297.074-.414a.47.47 0 0 1 .375-.187h2.898l.867 5.035c.043.258.105.52.18.773-1.973-.629-3.504-2.195-4.094-4.18zm11.059 4.785H11.77V6.063l-.742.348c-.305.141-.668.02-.832-.273a.64.64 0 0 1 .223-.844l1.789-1.129h1.016zm9.914-5.812l-.301 1.027c-.59 1.984-2.121 3.551-4.094 4.18.074-.254.137-.516.18-.773l.867-5.035h2.898a.47.47 0 0 1 .375.188c.09.117.117.273.074.414zm0 0" fill="rgb(17.647059%,24.313725%,31.372549%)"/></svg> Prizes</a></div>
+  <div class="section"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" xmlns:v="https://vecta.io/nano"><path d="M16.109 12.902c2.223-1.57 3.172-4.398 2.348-6.992a6.25 6.25 0 0 0-11.914 0c-.824 2.594.125 5.422 2.348 6.992a10.18 10.18 0 0 0-7.328 9.754c0 .43.352.781.781.781h20.313c.43 0 .781-.352.781-.781a10.18 10.18 0 0 0-7.328-9.754zm-8.297-5.09c0-2.586 2.102-4.687 4.688-4.687s4.688 2.102 4.688 4.688A4.69 4.69 0 0 1 12.5 12.5a4.7 4.7 0 0 1-4.687-4.687zM3.16 21.875a8.61 8.61 0 0 1 8.559-7.812h1.563a8.61 8.61 0 0 1 8.559 7.813zm0 0" fill="rgb(0%,0%,0%)"/></svg> My Account</div>
+  <div class="section"><a href="/my-purchases" class="dt-side-nav__link nav-link-mobile" title="Metrics"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" xmlns:v="https://vecta.io/nano"><g fill="rgb(0%,0%,0%)"><path d="M15.77 8.906c-.285-.285-.75-.285-1.035 0s-.285.75 0 1.035l1.035 1.035a.73.73 0 0 0 .52.215c.191 0 .379-.078.516-.215l2.074-2.07c.285-.289.285-.75 0-1.035a.74.74 0 0 0-1.039 0l-1.551 1.551zm2.07 2.676l-1.551 1.551-.52-.516c-.285-.285-.75-.285-1.035 0s-.285.75 0 1.035l1.035 1.035a.73.73 0 0 0 .52.215c.191 0 .379-.078.516-.215l2.074-2.07c.285-.289.285-.75 0-1.035a.74.74 0 0 0-1.039 0zM12.5 8.691H6.641a.73.73 0 0 0-.73.734c0 .406.324.73.73.73H12.5c.406 0 .734-.328.734-.73s-.328-.734-.734-.734zm0 0"/><use xlink:href="#B"/><use xlink:href="#B" y="3.711"/><use xlink:href="#B" y="7.422"/><path d="M21.289 2.93h-4.164c-.277-.586-.867-.977-1.547-.977h-.676L15.164.91a.73.73 0 0 0-.133-.629.73.73 0 0 0-.578-.281h-3.906a.74.74 0 0 0-.578.281.74.74 0 0 0-.133.629l.262 1.043h-.676c-.68 0-1.27.391-1.547.977H3.711a.73.73 0 0 0-.73.734V24.27c0 .406.324.73.73.73h17.578a.73.73 0 0 0 .734-.73V3.664c0-.406-.328-.734-.734-.734zm-11.867.488h1.613c.227 0 .441-.105.578-.281a.74.74 0 0 0 .133-.629l-.262-1.043h2.031l-.262 1.043a.73.73 0 0 0 .711.91h1.613c.121 0 .219.086.242.203l.211 1.262H8.969l.211-1.262c.02-.117.121-.203.242-.203zm11.137 20.117H4.445V4.395h3.121l-.184 1.102c-.035.211.027.43.164.594s.344.258.559.258h8.789a.73.73 0 0 0 .723-.852l-.18-1.102h3.121zm0 0"/></g><defs ><path id="B" d="M12.5 12.402H6.641a.73.73 0 0 0-.73.734c0 .406.324.73.73.73H12.5a.73.73 0 0 0 .734-.73c0-.406-.328-.734-.734-.734zm0 0"/></defs></svg>Results</a></div>
+</div>
+				
+				
+				
+				
+				
+				
+				
+				
+                <main class="dt-main">
+                    <!-- Sidebar -->
+                    <aside id="main-sidebar" class="dt-sidebar">
+                        <div class="dt-sidebar__container">
+
+                           
+                            
+							
+							
+							
+							
+							<div class="card1" data-state="#about">
+  <div class="card1-header">
+    <div class="card1-cover" style="background-image: url('https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')"></div>
+    <img class="card1-avatar" src="assets/images/av.png" alt="avatar" />
+    <h1 class="card1-fullname">Dream Fullfill</h1>
+    <h2 class="card1-jobtitle">UI Developer</h2>
+  </div>
+  <div class="card1-main">
+    <div class="card1-section is-active" id="about">
+      <div class="card1-content">
+        <div class="card1-subtitle">ABOUT</div>
+        <p class="card1-desc">Whatever tattooed stumptown art party sriracha gentrify hashtag intelligentsia readymade schlitz brooklyn disrupt.
+        </p>
+      </div>
+      <div class="card1-social">
+        <a href="#"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.997 3.985h2.191V.169C17.81.117 16.51 0 14.996 0c-3.159 0-5.323 1.987-5.323 5.639V9H6.187v4.266h3.486V24h4.274V13.267h3.345l.531-4.266h-3.877V6.062c.001-1.233.333-2.077 2.051-2.077z" /></svg></a>
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M512 97.248c-19.04 8.352-39.328 13.888-60.48 16.576 21.76-12.992 38.368-33.408 46.176-58.016-20.288 12.096-42.688 20.64-66.56 25.408C411.872 60.704 384.416 48 354.464 48c-58.112 0-104.896 47.168-104.896 104.992 0 8.32.704 16.32 2.432 23.936-87.264-4.256-164.48-46.08-216.352-109.792-9.056 15.712-14.368 33.696-14.368 53.056 0 36.352 18.72 68.576 46.624 87.232-16.864-.32-33.408-5.216-47.424-12.928v1.152c0 51.008 36.384 93.376 84.096 103.136-8.544 2.336-17.856 3.456-27.52 3.456-6.72 0-13.504-.384-19.872-1.792 13.6 41.568 52.192 72.128 98.08 73.12-35.712 27.936-81.056 44.768-130.144 44.768-8.608 0-16.864-.384-25.12-1.44C46.496 446.88 101.6 464 161.024 464c193.152 0 298.752-160 298.752-298.688 0-4.64-.16-9.12-.384-13.568 20.832-14.784 38.336-33.248 52.608-54.496z" /></svg></a>
+        <a href="#"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M301 256c0 24.852-20.148 45-45 45s-45-20.148-45-45 20.148-45 45-45 45 20.148 45 45zm0 0" />
+            <path d="M332 120H180c-33.086 0-60 26.914-60 60v152c0 33.086 26.914 60 60 60h152c33.086 0 60-26.914 60-60V180c0-33.086-26.914-60-60-60zm-76 211c-41.355 0-75-33.645-75-75s33.645-75 75-75 75 33.645 75 75-33.645 75-75 75zm86-146c-8.285 0-15-6.715-15-15s6.715-15 15-15 15 6.715 15 15-6.715 15-15 15zm0 0" />
+            <path d="M377 0H135C60.562 0 0 60.563 0 135v242c0 74.438 60.563 135 135 135h242c74.438 0 135-60.563 135-135V135C512 60.562 451.437 0 377 0zm45 332c0 49.625-40.375 90-90 90H180c-49.625 0-90-40.375-90-90V180c0-49.625 40.375-90 90-90h152c49.625 0 90 40.375 90 90zm0 0" /></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.994 24v-.001H24v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07V7.976H8.489v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243V24zM.396 7.977h4.976V24H.396zM2.882 0C1.291 0 0 1.291 0 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909A2.884 2.884 0 002.882 0z" /></svg></a>
+      </div>
+    </div>
+    
+    <div class="card1-section" id="contact">
+      <div class="card1-content">
+        <div class="card1-subtitle">CONTACT</div>
+        <div class="card1-contact-wrapper">
+          <div class="card1-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" /></svg>
+            Algonquin Rd, Three Oaks Vintage, MI, 49128
+          </div>
+          <div class="card1-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg>(269) 756-9809</div>
+          <div class="card1-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="M22 6l-10 7L2 6" /></svg>
+            william@rocheald.com
+          </div>
+          <button class="contact-me">Whatsapp</button>
+        </div>
+      </div>
+    </div>
+    <div class="card1-buttons">
+      <button data-section="#about" class="is-active">ABOUT</button>
+      
+      <button data-section="#contact">CONTACT</button>
+    </div>
+  </div>
+</div>
+
+							
+							
+							
+							
+							
+							
+							
+							
+
+                            <!-- Sidebar Navigation -->
+                            <ul class="dt-side-nav" ng-if="main.authorized">
+
+                                <!-- Menu Header -->
+                                <li class="dt-side-nav__item dt-side-nav__header">
+                                    <span class="dt-side-nav__text">Users Dashboard</span>
+                                </li>
+                                <!-- /menu header -->
+                                <li class="dt-side-nav__item">
+                                    <a href="/users" class="dt-side-nav__link" title="Metrics">
+                                        <i class="icon icon-users icon-fw icon-lg"></i>
+                                        <span class="dt-side-nav__text">Users</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /sidebar navigation -->
+                        </div>
+
+
+                    </aside>
+
+                    <div class="dt-content-wrapper">
+
+                        <!-- Site Content -->
+                        <div class="dt-content">
+
+                            <div ng-if="main.home && main.isLoggedIn">
+                                <!-- Profile -->
+                                <div class="profile">
+
+                                    <!-- Profile Content -->
+                                    <div class="profile-content">
+
+                                        <!-- Grid -->
+                                        <div class="row">
+
+                                            <div class="col-xl-12 col-12 order-xl-2">
+
+                                                <!-- Grid -->
+                                                <div class="row">
+                                                    <!-- Grid Item -->
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-users dt-icon-bg bg-primary text-primary"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">10</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Today's Active Users</div>
+                                                                    <p class="card-text text-light-gray f-12">Last
+                                                                        update just now</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
+                                                    <!-- /grid item -->
+
+                                                    <!-- Grid Item -->
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-company dt-icon-bg bg-success text-success"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">124</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Users</div>
+                                                                    <p class="card-text text-light-gray f-12">update
+                                                                        just now</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
+                                                    <!-- /grid item -->
+
+                                                    <!-- Grid Item -->
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-customer dt-icon-bg bg-secondary text-secondary"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">1544</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Coupons Baught</div>
+                                                                    <p class="card-text text-light-gray f-12">Just
+                                                                        updated</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
+                                                    <!-- /grid item -->
+
+                                                    <!-- Grid Item -->
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-revenue-new dt-icon-bg bg-orange text-orange"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span class="h2 mb-0 font-weight-500 mr-2">₹
+                                                                            20,00,000</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Prizes</div>
+                                                                    <p class="card-text text-light-gray f-12">Just
+                                                                        updated</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
+                                                    <!-- /grid item -->
+                                                </div>
+                                                <!-- /grid -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- /grid -->
+
+                                    </div>
+                                    <!-- /profile content -->
+
+                                </div>
+                                <!-- /profile -->
+                            </div>
+
+                            <div ng-show="!main.home">
+                                <div class="ng-view" autoscroll="true"></div>
+                            </div>
+                            <!-- /page header -->
+                        </div>
+                        <!-- /site content -->
+                    </div>
+                    <!-- Site Content Wrapper -->
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="/assets/modules/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/modules/moment/moment.js"></script>
+    <script src="/assets/modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Perfect Scrollbar jQuery -->
+    <script src="/assets/modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <!-- /perfect scrollbar jQuery -->
+
+    <!-- masonry script -->
+    <script src="/assets/modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
+    <script src="/assets/modules/sweetalert2/dist/sweetalert2.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <script src="/assets/js/customizer.js"></script>
+	<script src="/assets/js/script-about.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="/assets/js/script.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="/assets/modules/chartist/dist/chartist.min.js"></script>
+    <script src="/assets/modules//owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="/assets/js/custom/charts/dashboard-listing.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!-- Grid Item -->
+<div class="col-xl-12 mb-5">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Result : {{ result.purchase.prize.name }}</h1>
+  </div>
+</div>
+
+<div class="col-xl-12 col-md-12 order-xl-1" ng-repeat="purchase in result.purchase.prize.prizes">
+
+  <!-- Card -->
+  <div class="dt-card bg-primary text-white">
+
+    <!-- Card Header -->
+    <div class="dt-card__header pt-6 px-6 mb-4">
+
+      <!-- Card Heading -->
+      <div class="dt-card__heading">
+        <h3 class="dt-card__title text-white">{{ purchase.name }}</h3>
+        <p class=" text-white">{{ purchase.description }}</p>
+      </div>
+      <!-- /card heading -->
+
+    </div>
+    <!-- /card header -->
+
+    <!-- Card Body -->
+    <div class="dt-card__body px-6">
+      <!-- Grid -->
+      <div class="row no-gutters">
+        <!-- Grid Item -->
+        <div class="col-6 pr-2 border-right">
+          <div class="display-1 font-weight-500 mb-3">
+            {{ result.purchase.code }}<span class="d-inline-block f-14">&nbsp; is your winner code</span>
+          </div>
+          <p>({{ result.purchase.prize.prizes.length }} amazing & exciting prizes to win!)</p>
+        </div>
+        <!-- /grid item -->
+        <div class="col-6 text-center">
+          <div class="mb-3">
+            <a href="#" ng-click="result.spin($index, purchase.code, result.purchase.code)"
+              class="btn btn-info btn-xs text-uppercase">Spin the wheel to see the result</a>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <iframe ng-src="{{getIframeSrc(purchase.code)}}"></iframe>
+        </div>
+        <h3 class="text-white text-center">{{ result.message[$index] }}</h3>
+      </div>
+      <!-- /grid -->
+
+    </div>
+    <!-- /card body -->
+
+  </div>
+  <!-- /card -->
+
+</div>

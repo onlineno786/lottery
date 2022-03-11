@@ -78,106 +78,116 @@
         <div class="dt-root__inner">
 
             <!-- Login Container -->
-            
-			
-			
-			
-			<div class="body2 dt-login--container" ng-show="main.home && !main.isLoggedIn" ng-show="main.home && !main.isLoggedIn">
-				<div class="login-card">
-					<div class="login-card-content" ng-if="main.login">
-						<div class="header-login">
-							<div class="logo-login">
-								<div><img src="assets/images/dream.png"></img></div>
-							</div>
-							<img class="logo-nav" src="assets/images/av2.png" alt="avatar" />
-							<h3>Powered By DreamFullFill Pvt Ltd</h3>
-						</div>
-						
-						<form class="form" ng-submit="main.doLogin(logData);">
-						
-						<div class="form">
-						
-							<div class="form-field-login username">
-								<div class="icon">
-									<i class="far fa-user"></i>
-								</div>
-									<input type="text" placeholder="Enter mobile number" ng-model="main.logData.mobileNumber" required>
-							</div>
-							<div class="form-field-login password">
-								<div class="icon">
-									<i class="fas fa-lock"></i>
-								</div>
-								<input type="password" placeholder="Password" ng-model="main.logData.password" required>
-							</div>
+            <div class="dt-login--container" ng-show="main.home && !main.isLoggedIn"
+                style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80');background-size: cover"
+                ng-show="main.home && !main.isLoggedIn">
 
-								<button class="button-login" type="submit">
-									Login
-								</button>
-								<div>
-									Don't have an account? <a href="#" ng-click="main.changeAuth()">Sign Up Now</a>
-								</div>
-						</div>
-						</form>
-						<div class="text-center" ng-show="main.loading">
+                <!-- Login Content -->
+                <div class="dt-login__content-wrapper">
+
+                    <!-- Login Background Section -->
+                    <div class="dt-login__bg-section">
+
+                        <div class="dt-login__bg-content">
+                            <!-- Login Title -->
+                            <h1 class="dt-login__title">Join</h1>
+                            <!-- /login title -->
+
+                            <p class="f-16">Join and explore Dream Fullfill platform.</p>
+                        </div>
+                    </div>
+                    <!-- /login background section -->
+
+                    <!-- Login Content Section -->
+                    <div class="dt-login__content">
+
+                        <!-- Login Content Inner -->
+                        <div class="dt-login__content-inner" ng-if="main.login">
+
+                            <!-- Form -->
+                            <form ng-submit="main.doLogin(logData);">
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Mobile Number</label>
+                                    <input type="text" class="form-control" placeholder="Enter mobile number"
+                                        ng-model="main.logData.mobileNumber" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password"
+                                        ng-model="main.logData.password" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary text-uppercase">Login</button>
+                                    <a href="#" class="text-success ml-2" ng-click="main.changeAuth()">Not
+                                        registered?</a>
+                                </div>
+                                <!-- /form group -->
+                            </form>
+                            <div class="text-center" ng-show="main.loading">
                                 <span class="glyphicon glyphicon-repeat spinner"></span>
                                 <p> Loading..... </p>
                             </div>
-							<div class="row show-hide-message">
+
+                            <div class="row show-hide-message">
                                 <div class="alert alert-success" ng-show="main.successMsg">
                                     <strong> Success! </strong> {{ main.successMsg }}
                                 </div>
                             </div>
-							<div class="row show-hide-message">
+
+                            <div class="row show-hide-message">
                                 <div class="alert alert-danger" ng-show="main.errorMsg">
                                     <strong> Oops! </strong> {{ main.errorMsg }}
                                 </div>
                             </div>
-						
-					</div>
-					
-					<div class="login-card-content" ng-if="!main.login">
-						<div class="header-login">
-							<div class="logo-login">
-								<div><img src="assets/images/dream.png"></img></div>
-							</div>
-							<img class="logo-nav" src="assets/images/av2.png" alt="avatar" />
-							<h3>Complete Your Dream</h3>
-						</div>
-						
-						<form class="form" ng-submit="main.doSignup(signupData);" ng-show="!main.successMsg">
-						
-						<div class="form">
-						
-							
-							
-							<div class="form-field-login username">
-								<div class="icon">
-									<i class="far fa-user"></i>
-								</div>
-									<input type="text" placeholder="Enter Your Name" ng-model="main.signupData.name" required>
-							</div>
-							<div class="form-field-login username">
-								<div class="icon">
-									<i class="far fa-user"></i>
-								</div>
-									<input type="text" placeholder="Enter mobile number" ng-model="main.signupData.mobileNumber" required>
-							</div>
-							<div class="form-field-login password">
-								<div class="icon">
-									<i class="fas fa-lock"></i>
-								</div>
-								<input type="password" placeholder="Password" ng-model="main.signupData.password" required>
-							</div>
+                            <!-- /form -->
+                        </div>
 
-								<button class="button-login" type="submit">
-									Singup
-								</button>
-								<div>
-									Alredy have an account? <a href="#" ng-click="main.changeAuth()">Login</a>
-								</div>
-						</div>
-						</form>
-						<div class="text-center" ng-show="main.loading">
+                        <!-- Signup Content Inner -->
+                        <div class="dt-login__content-inner" ng-if="!main.login">
+
+                            <!-- Form -->
+                            <form ng-submit="main.doSignup(signupData);" ng-show="!main.successMsg">
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter your name"
+                                        ng-model="main.signupData.name" required>
+                                </div>
+                                <!-- /form group -->
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Mobile Number</label>
+                                    <input type="text" class="form-control" placeholder="Enter mobile number"
+                                        ng-model="main.signupData.mobileNumber" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password"
+                                        ng-model="main.signupData.password" required>
+                                </div>
+                                <!-- /form group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary text-uppercase">Signup</button>
+                                    <a href="#" class="text-success ml-2" ng-click="main.changeAuth()">Back to
+                                        login?</a>
+                                </div>
+                                <!-- /form group -->
+                            </form>
+                            <div class="text-center" ng-show="main.loading">
                                 <span class="glyphicon glyphicon-repeat spinner"></span>
                                 <p> Loading..... </p>
                             </div>
@@ -195,19 +205,15 @@
                                     <strong> Oops! </strong> {{ main.errorMsg }}
                                 </div>
                             </div>
-						
-					</div>
-					
-					
-					
-					<div class="login-card-footer">
-						<a href="">Forgot password?</a>
-					</div>
-				</div>
-  
-			</div>
-			
-			
+                            <!-- /form -->
+                        </div>
+                    </div>
+                    <!-- /login content section -->
+
+                </div>
+                <!-- /login content -->
+
+            </div>
             <!-- /login container -->
 
             <div ng-show="main.isLoggedIn">
@@ -229,7 +235,7 @@
                             <!-- Brand logo -->
                             <span class="dt-brand__logo">
                                 <a class="dt-brand__logo-link text-white" href="/">
-                                    <img class="logo-nav" src="assets/images/av2.png" alt="avatar" />
+                                    Dream Fullfill
                                 </a>
                             </span>
                             <!-- /brand logo -->
@@ -405,7 +411,7 @@
                     <div class="dt-content-wrapper">
 
                         <!-- Site Content -->
-                        <div class="dt-content dt-content2">
+                        <div class="dt-content">
 
                             <div ng-if="main.home && main.isLoggedIn">
                                 <!-- Profile -->
@@ -422,19 +428,26 @@
                                                 <!-- Grid -->
                                                 <div class="row">
                                                     <!-- Grid Item -->
-                                                    <div class="col-sm-3 home-flex">
+                                                    <div class="col-sm-3">
                                                         <!-- Card -->
                                                         <div class="dt-card">
 
                                                             <!-- Card Body -->
                                                             <div class="dt-card__body d-flex flex-sm-column">
-                                                                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/Jry9XwKIplk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 10px;"></iframe>
-																
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-users dt-icon-bg bg-primary text-primary"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">10</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Today's Active Users</div>
+                                                                    <p class="card-text text-light-gray f-12">Last
+                                                                        update just now</p>
+                                                                </div>
                                                             </div>
-															
-                                                                        
-                                                                            <h1 class="h1-card">How To Buy Cupon</h1>
-                                                                    
                                                             <!-- /card body -->
 
                                                         </div>
@@ -443,16 +456,26 @@
                                                     <!-- /grid item -->
 
                                                     <!-- Grid Item -->
-                                                    <div class="col-sm-3 home-flex">
+                                                    <div class="col-sm-3">
                                                         <!-- Card -->
                                                         <div class="dt-card">
 
                                                             <!-- Card Body -->
                                                             <div class="dt-card__body d-flex flex-sm-column">
-                                                                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/Jry9XwKIplk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 10px;"></iframe>
-																
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-company dt-icon-bg bg-success text-success"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">124</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Users</div>
+                                                                    <p class="card-text text-light-gray f-12">update
+                                                                        just now</p>
+                                                                </div>
                                                             </div>
-															<h1 class="h1-card">How To See Result</h1>
                                                             <!-- /card body -->
 
                                                         </div>
@@ -461,11 +484,59 @@
                                                     <!-- /grid item -->
 
                                                     <!-- Grid Item -->
-                                                    
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-customer dt-icon-bg bg-secondary text-secondary"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span
+                                                                            class="h2 mb-0 font-weight-500 mr-2">1544</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Coupons Baught</div>
+                                                                    <p class="card-text text-light-gray f-12">Just
+                                                                        updated</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
                                                     <!-- /grid item -->
 
                                                     <!-- Grid Item -->
-                                                    
+                                                    <div class="col-sm-3">
+                                                        <!-- Card -->
+                                                        <div class="dt-card">
+
+                                                            <!-- Card Body -->
+                                                            <div class="dt-card__body d-flex flex-sm-column">
+                                                                <div class="mb-sm-7 mr-7 mr-sm-0">
+                                                                    <i
+                                                                        class="icon icon-revenue-new dt-icon-bg bg-orange text-orange"></i>
+                                                                </div>
+                                                                <div class="flex-1">
+                                                                    <div class="d-flex align-items-center mb-2">
+                                                                        <span class="h2 mb-0 font-weight-500 mr-2">₹
+                                                                            20,00,000</span>
+                                                                    </div>
+                                                                    <div class="h5 mb-2">Total Prizes</div>
+                                                                    <p class="card-text text-light-gray f-12">Just
+                                                                        updated</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /card body -->
+
+                                                        </div>
+                                                        <!-- /card -->
+                                                    </div>
                                                     <!-- /grid item -->
                                                 </div>
                                                 <!-- /grid -->
@@ -509,7 +580,7 @@
     <script src="/assets/js/functions.js"></script>
     <script src="/assets/js/customizer.js"></script>
 	<script src="/assets/js/script-about.js"></script>
-	
+	<script src="/assets/js/script-login.js"></script>
 
     <!-- Custom JavaScript -->
     <script src="/assets/js/script.js"></script>

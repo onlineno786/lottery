@@ -127,6 +127,11 @@ angular
 
   .controller("resultCtrl", function (user, $routeParams, $scope, $sce) {
     let app = this;
+
+    $scope.isAllowedToSeeResult = (date) => {
+      return new Date(date) <= new Date();
+    }
+
     user
       .purchases({ purchaseId: $routeParams.purchaseId })
       .then((data) => {

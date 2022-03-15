@@ -16,6 +16,12 @@ router.post(
     prizeController.prize
 );
 
+router.patch(
+    '/:prizeId',
+    AdminGuard,
+    prizeController.updatePrize
+);
+
 router.get(
     '/',
     Guard,

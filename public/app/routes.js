@@ -13,6 +13,13 @@ var app = angular.module('userRoutes', ['ngRoute'])
                 authenticated : false
             })
 
+            .when('/settings', {
+                templateUrl : 'app/views/authentication/settings.html',
+                authenticated : true,
+                controller : 'settingsCtrl',
+                controllerAs : 'settings'
+            })
+
             .when('/prizes', {
                 templateUrl : 'app/views/dashboard/prize/prizes.html',
                 authenticated : true,
@@ -51,6 +58,14 @@ var app = angular.module('userRoutes', ['ngRoute'])
                 permission : ['ADMIN'],
                 controller : 'addPrizeCtrl',
                 controllerAs : 'addPrize'
+            })
+
+            .when('/edit-prize/:prizeId', {
+                templateUrl : 'app/views/dashboard/prize/edit-prize.html',
+                authenticated : true,
+                permission : ['ADMIN'],
+                controller : 'editPrizeCtrl',
+                controllerAs : 'editPrize'
             })
 
             .when('/prize/:prizeId', {

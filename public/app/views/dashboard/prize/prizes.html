@@ -39,7 +39,8 @@
                 <div class="col-6 text-center">
                     <p>Declares very soon.</p>
                     <div class="mb-3">
-                        <a href="/prize/{{ prize._id }}" class="btn btn-secondary btn-xs text-uppercase">Buy Now</a>
+                        <a href="/prize/{{ prize._id }}" ng-if="!main.authorized" class="btn btn-secondary btn-xs text-uppercase">Buy Now</a>
+                        <a href="/edit-prize/{{ prize._id }}" ng-if="main.authorized" class="btn btn-secondary btn-xs text-uppercase">Edit Now</a>
                     </div>
                 </div>
                 <!-- /grid item -->

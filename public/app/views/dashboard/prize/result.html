@@ -37,8 +37,9 @@
         <!-- /grid item -->
         <div class="col-6 text-center">
           <div class="mb-3">
-            <a href="#" ng-if="isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Spin the wheel to see the result</a>
-            <a href="#" ng-if="!isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Result will be declared on {{ purchase.date }} </a>
+            <a href="#" ng-if="isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Spin the wheel to see the result {{purchase.date}}</a>
+            <a href="#" ng-if="!isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Result will be declared on {{ purchase.date | date : 'd MM, yyyy, hh:mm a'}} </a>
+            <p class="mt-2" ng-if="!isAllowedToSeeResult(purchase.date)"> {{ result.timer[$index] }}</p>
           </div>
         </div>
 

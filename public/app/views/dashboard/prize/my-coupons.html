@@ -1,16 +1,16 @@
 <!-- Grid Item -->
 <div class="col-xl-12 mb-5">
-    <div class="d-flex align-items-center justify-content-between">
-        <h1>Your Purchases</h1>
-    </div>
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Your Purchases</h1>
+  </div>
 </div>
 
 
 
-    <!-- Card -->
-    
-	<div class="ticket ticket-1" ng-repeat="purchase in myPurchases.purchases">
-  
+<!-- Card -->
+
+<div class="ticket ticket-1" ng-repeat="purchase in myPurchases.purchases">
+
   <div class="date">
     <span class="day">31</span>
     <span class="month-and-time">OCT</br><span class="small">8PM</span></span>
@@ -19,34 +19,33 @@
   <div class="artist">
     <span class="name">DREAM FULLFILL</span>
     </br>
-<span class="live small">COUPON</span>
+    <span class="live small">COUPON</span>
   </div>
 
   <div class="location" style="width: 40%;">
     <span>{{ purchase.prize.name }}</span>
-    
+
   </div>
 
   <div class="rip">
   </div>
-  
-  
+
+
   <div class="cta1">RS: ₹ 200 {{ prize.price }}</div>
   <div class="cta">
-	<img src="assets/images/logo-cupon.png">
-	<div class="ticket-text1">
-	<p>Name: {{ main.name }}</p>
-	<p>Mobile: {{ user.mobileNumber }}</p>
-	</div>
-	
+    <img src="assets/images/logo-cupon.png">
+    <div class="ticket-text1">
+      <p>Name: {{ main.name }}</p>
+      <p>Mobile: {{ user.mobileNumber }}</p>
+    </div>
+
     <button class="ticket-button" href="#">Coupon Code</button>
-	<div class="ticket-text2">
-	<p class="ticket-code">{{ purchase.code }}</p>
-	
-	</div>
+    <div class="ticket-text2">
+      <p class="ticket-code">{{ purchase.code }}</p>
+
+    </div>
 
   </div>
 
 </div>
-    <!-- /card -->
-
+<!-- /card -->

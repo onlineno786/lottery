@@ -114,3 +114,19 @@ exports.purchases       = (req, res) => {
 
     })
 }
+
+exports.updatePrize     = (req, res) => {
+    const {
+        prizeId
+    }                   = req.params;
+    const body          = req.body;
+
+    prizeService.updatePrize(prizeId, body, (error, result) => {
+        if(error) {
+            return res.status(400).json(response.build('ERROR', 
+                errorHelper.parseError(error) 
+            ));  
+        }
+        return res.status(200).json(response.build('SUCCESS', { "data" : result }));
+    })
+}

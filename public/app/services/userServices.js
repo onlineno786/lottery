@@ -11,6 +11,11 @@ angular
     userFactory.addNewPrize = function (prizes) {
       return $http.post("/api/prize", prizes);
     };
+    
+    userFactory.editPrize = function (prizeId, prizes) {
+      console.log(prizeId, prizes)
+      return $http.patch("/api/prize/" + prizeId, prizes);
+    };
 
     userFactory.getPrizes = function (data) {
       if(data && data.prizeId) {

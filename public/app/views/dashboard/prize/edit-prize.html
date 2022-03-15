@@ -1,0 +1,101 @@
+<div class="dt-page__header">
+    <h1 class="dt-page__title">Edit Prize</h1>
+</div>
+
+<form ng-submit="editPrize.editPrize(prizeData);" class="mb-6" ng-show="!editPrize.successMsg">
+
+    <div class="row">
+        <!-- Grid Item -->
+        <div class="col-12">
+            <!-- Card -->
+            <div class="dt-card">
+                <!-- Card Body -->
+                <div class="dt-card__body">
+                    <!-- Form -->
+                    <div class="form-row">
+                        <div class="col-sm-6 mb-3">
+                            <label>Cupon Catagories Name </label>
+                            <input class="form-control" type="text" name="name" placeholder="Cupon Catagories Name"
+                                ng-model="editPrize.prizeData.name" required>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label>Cupon Price </label>
+                            <input class="form-control" type="number" name="price" placeholder="Enter Cupon Price"
+                                ng-model="editPrize.prizeData.price" required>
+                        </div>
+                    </div>
+                    <!-- /form -->
+                    <!-- /card body -->
+                </div>
+                <!-- /card -->
+            </div>
+            <!-- /grid item -->
+        </div>
+        <!-- Grid Item -->
+        <div class="col-12">
+            <!-- Card -->
+            <div class="dt-card" ng-repeat="prize in [] | range : editPrize.totalPrizes" ng-init="prizeIndex = $index">
+                <div class="dt-card__header">
+                    <h3>Prize #{{ $index + 1 }}</h3>
+                </div>
+                <!-- Card Body -->
+                <div class="dt-card__body">
+                    <!-- Form -->
+                    <div class="form-row">
+                        <div class="col-sm-12 mb-3">
+                            <label>Title </label>
+                            <input class="form-control" type="text" name="title" placeholder="Enter prize title"
+                                ng-model="editPrize.prizeData.prizes[prizeIndex].title" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-12 mb-3">
+                            <label>Description </label>
+                            <input class="form-control" type="text" name="description" placeholder="Enter prize description"
+                                ng-model="editPrize.prizeData.prizes[prizeIndex].description" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm-6 mb-3">
+                            <label>Winner Code </label>
+                            <input class="form-control" type="number" name="code" placeholder="Enter prize winner code"
+                                ng-model="editPrize.prizeData.prizes[prizeIndex].code" min="1000" max="9999" required>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label>Declare Date </label>
+                            <input class="form-control" type="datetime-local" name="name" placeholder="Enter prize declaration date"
+                                ng-model="editPrize.prizeData.prizes[prizeIndex].date" required>
+                        </div>
+                    </div>
+                    <!-- /form -->
+                    <!-- /form -->
+                    <!-- /card body -->
+
+                </div>
+                <!-- /card -->
+            </div>
+            <!-- /grid item -->
+            <button class="btn btn-primary" ng-click="editPrize.addPrizeNow()">Add Prizes</button>
+        </div>
+        <!-- /grid -->
+    </div>
+    <button class="btn btn-success mt-10 text-center" type="submit">Submit Cupon</button>
+
+</form>
+
+<div class="alert alert-primary" role="alert" ng-show="editPrize.loading">
+    <h4 class="alert-heading">Please wait!</h4>
+    <p> Adding new prize... Please wait!</p>
+</div>
+
+<div class="alert alert-success" role="alert" ng-show="editPrize.successMsg">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>{{ editPrize.successMsg }}</p>
+</div>
+
+<div class="alert alert-danger" role="alert" ng-show="editPrize.errorMsg">
+    <h4 class="alert-heading">Oops!</h4>
+    <p>{{ editPrize.errorMsg }}</p>
+
+</div>

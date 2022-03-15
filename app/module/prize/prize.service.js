@@ -16,6 +16,17 @@ exports.createPrize          = (payload, callback) => {
     })
 }
 
+// update a prize
+exports.updatePrize          = (prizeId, payload, callback) => {
+    Prize.findByIdAndUpdate(prizeId, payload, function(error, result) {
+        if(error) {
+            console.log(error)
+            return callback(errorHelper.findMongoError(error))
+        }
+        return callback(null, result);
+    })
+}
+
 // get all prize
 exports.getPrizes            = (query, callback) => {
     Prize.find(query, (error, result) => {

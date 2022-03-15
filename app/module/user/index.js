@@ -33,7 +33,7 @@ router.get(
 
 router.patch(
     '/',
-    UserGuard,
+    Guard,
     userController.update
 );
 

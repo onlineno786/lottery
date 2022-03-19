@@ -37,6 +37,16 @@ exports.getPrizes            = (query, callback) => {
     })
 }
 
+// delete a prize
+exports.deletePrize          = (prizeId, callback) => {
+    Prize.findByIdAndRemove(prizeId, (error, result) => {
+        if(error) {
+            return callback(errorHelper.findMongoError(error))
+        }
+        return callback(null, result);
+    })
+}
+
 // get all subs
 exports.getSubscriptions            = (query, callback) => {
     const pipeline  = [

@@ -14,6 +14,11 @@ var prizeSchema     = new mongoose.Schema({
     prizes          : {
         type        : Array,
         required    : true,
+    },
+    history         : {
+        type        : Boolean,
+        required    : true,
+        default     : true
     }
 }, {
     timestamps: true

@@ -22,6 +22,12 @@ router.patch(
     prizeController.updatePrize
 );
 
+router.delete(
+    '/:prizeId',
+    AdminGuard,
+    prizeController.delete
+);
+
 router.get(
     '/',
     Guard,

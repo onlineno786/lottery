@@ -83,16 +83,94 @@ angular
   .controller("prizesCtrl", function (user) {
     let app = this;
 
-    user
-      .getPrizes()
-      .then((data) => {
-        app.loading = false;
-        app.prizes = data.data.response.data;
-      })
-      .catch((error) => {
-        app.errorMsg = error.data.response.message;
-        app.loading = false;
-      });
+    // move prize to history
+    app.movePrize = (prizeId) => {
+      console.log("prize movei.");
+      user
+        .editPrize(prizeId, { history: true })
+        .then((data) => {
+          getPrizes();
+          console.log("moved to history.");
+        })
+        .catch((error) => {
+          app.errorMsg = error.data.response.message;
+          app.loading = false;
+        });
+    };
+
+    function getPrizes() {
+      user
+        .getPrizes()
+        .then((data) => {
+          app.loading = false;
+          app.prizes = data.data.response.data;
+        })
+        .catch((error) => {
+          app.errorMsg = error.data.response.message;
+          app.loading = false;
+        });
+    }
+
+    getPrizes();
+
+    app.wantDelete = {};
+
+    // want to delete prize
+    app.wantToDelete = (index) => {
+      app.wantDelete = {};
+      app.wantDelete[index] = true;
+    };
+    // delete prize
+    app.deletePrize = (prizeId) => {
+      console.log(prizeId);
+      user
+        .deletePrize(prizeId)
+        .then((data) => {
+          getPrizes();
+        })
+        .catch((error) => {
+          getPrizes();
+        });
+    };
+  })
+
+  .controller("historyCtrl", function (user) {
+    let app = this;
+
+    function getPrizes() {
+      user
+        .getPrizes({ history : true })
+        .then((data) => {
+          app.loading = false;
+          app.prizes = data.data.response.data;
+        })
+        .catch((error) => {
+          app.errorMsg = error.data.response.message;
+          app.loading = false;
+        });
+    }
+
+    getPrizes();
+
+    app.wantDelete = {};
+
+    // want to delete prize
+    app.wantToDelete = (index) => {
+      app.wantDelete = {};
+      app.wantDelete[index] = true;
+    };
+    // delete prize
+    app.deletePrize = (prizeId) => {
+      console.log(prizeId);
+      user
+        .deletePrize(prizeId)
+        .then((data) => {
+          getPrizes();
+        })
+        .catch((error) => {
+          getPrizes();
+        });
+    };
   })
 
   .controller("prizeCtrl", function (user, $routeParams) {
@@ -150,16 +228,13 @@ angular
         app.loading = false;
       });
 
-      // updated prize
+    // updated prize
     app.editPrize = (prizeData) => {
       app.errorMsg = false;
       app.loading = true;
 
       console.log(app.prizeData.prizes);
-      if (
-        app.prizeData.prizes &&
-        app.prizeData.prizes.length > 0
-      ) {
+      if (app.prizeData.prizes && app.prizeData.prizes.length > 0) {
         // validate the coupon value
         user
           .editPrize($routeParams.prizeId, app.prizeData)
@@ -271,23 +346,25 @@ angular
       });
   })
 
-  .controller('settingsCtrl', function (user, $timeout) {
-
+  .controller("settingsCtrl", function (user, $timeout) {
     var app = this;
 
     app.profileData = {};
 
     // update profile
     app.updateProfile = function (mainData) {
-        app.profileData.name = mainData.name;
-        console.log(app.profileData)
-        user.updateProfile(app.profileData).then(function (data) {
-            app.successMsg = 'Your profile has been updated.';
-            $timeout(function () {
-                app.successMsg = '';
-            }, 2000);
-        }).catch((error) => {
-            app.errorMsg = 'Oops, something went wrong, please try again.';
+      app.profileData.name = mainData.name;
+      console.log(app.profileData);
+      user
+        .updateProfile(app.profileData)
+        .then(function (data) {
+          app.successMsg = "Your profile has been updated.";
+          $timeout(function () {
+            app.successMsg = "";
+          }, 2000);
         })
+        .catch((error) => {
+          app.errorMsg = "Oops, something went wrong, please try again.";
+        });
     };
-});
+  });

@@ -1,8 +1,7 @@
 <!-- Grid Item -->
 <div class="col-xl-12 mb-5">
     <div class="d-flex align-items-center justify-content-between">
-        <h1>Prizes</h1>
-        <a class="btn btn-primary" href="/add-prize" ng-if="main.authorized" style="margin-top: 65px;">Add Prize Now</a>
+        <h1>History Prizes</h1>
     </div>
 </div>
 
@@ -47,12 +46,6 @@
                 <div ng-if="prizes.wantDelete[$index]">
                     are you sure?
                     <a href="#" ng-click="prizes.deletePrize(prize._id)" ng-if="main.authorized" class="btn btn-secondary btn-xs text-uppercase">Delete Prize</a>
-                </div>
-
-                <div ng-if="main.authorized">
-                    <br><hr>
-                    Move the prize to history?
-                    <a href="#" ng-click="prizes.movePrize(prize._id)" ng-if="main.authorized" class="btn btn-success btn-xs text-uppercase">Move Prize</a>
                 </div>
                 <!-- /grid item -->
             </div>

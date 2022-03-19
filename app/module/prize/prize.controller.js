@@ -32,6 +32,12 @@ exports.getAll          = (req, res) => {
         req.query       = { _id : Utility.toObjectId(req.query.prizeId) }
     }
 
+    if(req.query.history) {
+        req.query['history'] = true;
+    } else {
+        req.query['history'] = false;
+    }
+
     // get all registered prizes
     prizeService.getPrizes(req.query, (error, result) => {
         if(error) {
@@ -122,6 +128,21 @@ exports.updatePrize     = (req, res) => {
     const body          = req.body;
 
     prizeService.updatePrize(prizeId, body, (error, result) => {
+        if(error) {
+            return res.status(400).json(response.build('ERROR', 
+                errorHelper.parseError(error) 
+            ));  
+        }
+        return res.status(200).json(response.build('SUCCESS', { "data" : result }));
+    })
+}
+
+exports.delete          = (req, res) => {
+    const {
+        prizeId
+    }                   = req.params;
+
+    prizeService.deletePrize(prizeId, (error, result) => {
         if(error) {
             return res.status(400).json(response.build('ERROR', 
                 errorHelper.parseError(error) 

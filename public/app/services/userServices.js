@@ -11,32 +11,38 @@ angular
     userFactory.addNewPrize = function (prizes) {
       return $http.post("/api/prize", prizes);
     };
-    
+
     userFactory.editPrize = function (prizeId, prizes) {
-      console.log(prizeId, prizes)
       return $http.patch("/api/prize/" + prizeId, prizes);
     };
 
+    userFactory.deletePrize = function (prizeId) {
+      return $http.delete("/api/prize/" + prizeId);
+    };
+
     userFactory.getPrizes = function (data) {
-      if(data && data.prizeId) {
-        return $http.get("/api/prize" + '?prizeId=' + data.prizeId);
-      } else {
+      if (data && data.prizeId) {
+        return $http.get("/api/prize" + "?prizeId=" + data.prizeId);
+      } else if(data && data.history) {
+        return $http.get("/api/prize" + "?history=1");
+      }else {
         return $http.get("/api/prize");
       }
     };
 
     userFactory.purchase = function ({ prizeId }) {
-      return $http.post("/api/prize/" + prizeId + '/purchase');
+      return $http.post("/api/prize/" + prizeId + "/purchase");
     };
 
     userFactory.purchases = function (data) {
-      if(data && data.purchaseId) {
-        return $http.get("/api/prize/purchases" + '?purchaseId=' + data.purchaseId);
+      if (data && data.purchaseId) {
+        return $http.get(
+          "/api/prize/purchases" + "?purchaseId=" + data.purchaseId
+        );
       } else {
         return $http.get("/api/prize/purchases");
       }
     };
-
 
     // get users
     userFactory.getUsers = function () {

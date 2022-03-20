@@ -24,6 +24,9 @@ var userSchema      = new mongoose.Schema({
         type        : String,
         required    : true,
         default     : 'USER'
+    },
+    address         : {
+        type        : String
     }
 }, {
     timestamps: true

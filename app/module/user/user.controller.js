@@ -98,7 +98,8 @@ exports.update          = (req, res) => {
     const body          = req.body;
     
     const payload       = {
-        'name'          : body.name
+        'name'          : body.name,
+        'address'       : body.address
     }
 
     userService.updateUser(req.user._id, payload, (error, result) => {

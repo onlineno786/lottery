@@ -38,7 +38,7 @@
         <div class="col-6 text-center">
           <div class="mb-3">
             <a href="#" ng-if="isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">View Result Record</a>
-            <a href="#" ng-if="!isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Result will be declared on {{ purchase.date | date : 'd MM, yyyy, hh:mm a'}} </a>
+            <a href="#" ng-if="!isAllowedToSeeResult(purchase.date)" class="btn btn-info btn-xs text-uppercase">Result will be declared on {{ purchase.date | date : 'd MMM, yyyy, hh:mm a'}} </a>
             <p class="mt-2" ng-if="!isAllowedToSeeResult(purchase.date)"> {{ result.timer[$index] }}</p>
           </div>
         </div>

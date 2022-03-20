@@ -18,7 +18,7 @@ var prizeSchema     = new mongoose.Schema({
     history         : {
         type        : Boolean,
         required    : true,
-        default     : true
+        default     : false
     }
 }, {
     timestamps: true

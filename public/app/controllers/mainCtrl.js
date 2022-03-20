@@ -27,6 +27,7 @@ angular.module('mainController', ['authServices'])
             app.isLoggedIn = true;
             auth.getUser().then(function (data){
                 app.name = data.data.name;
+                app.address = data.data.address;
                 app.mobileNumber = data.data.mobileNumber;
                 app.role = data.data.role;
                 app.userId = data.data._id;
@@ -63,7 +64,7 @@ angular.module('mainController', ['authServices'])
                 app.loading = false;
                 app.successMsg = 'User authenticated. Logging in...';
                 $timeout(function () {
-                    $location.path('/settings');
+                    $location.path('/prizes');
                     app.logData = '';
                     app.successMsg = false;
                 }, 2000);

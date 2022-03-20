@@ -324,7 +324,7 @@ angular
 
       $scope.getIframeSrc = function (code) {
         let val =
-          "https://622735fd70836fa7aa1585c2--nifty-montalcini-2f52c6.netlify.app?answer=" +
+          "https://nifty-montalcini-2f52c6.netlify.app?answer=" +
           code;
         return $sce.trustAsResourceUrl(val);
       };
@@ -354,7 +354,7 @@ angular
     // update profile
     app.updateProfile = function (mainData) {
       app.profileData.name = mainData.name;
-      console.log(app.profileData);
+      app.profileData.address = mainData.address;
       user
         .updateProfile(app.profileData)
         .then(function (data) {

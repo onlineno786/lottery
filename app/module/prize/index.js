@@ -40,6 +40,12 @@ router.post(
     prizeController.purchase
 );
 
+router.post(
+    '/:prizeId/purchase/capture',
+    Guard,
+    prizeController.capture
+);
+
 router.get(
     '/purchases',
     Guard,

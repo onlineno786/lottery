@@ -18,6 +18,10 @@ var subscriptionSchema     = new mongoose.Schema({
     code            : {
         type        : Number,
         required    : true
+    },
+    orderId         : {
+        type        : String,
+        required    : true
     }
 }, {
     timestamps: true

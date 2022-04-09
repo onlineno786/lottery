@@ -23,15 +23,21 @@ angular
     userFactory.getPrizes = function (data) {
       if (data && data.prizeId) {
         return $http.get("/api/prize" + "?prizeId=" + data.prizeId);
-      } else if(data && data.history) {
+      } else if (data && data.history) {
         return $http.get("/api/prize" + "?history=1");
-      }else {
+      } else {
         return $http.get("/api/prize");
       }
     };
 
     userFactory.purchase = function ({ prizeId }) {
       return $http.post("/api/prize/" + prizeId + "/purchase");
+    };
+
+    // capturePayments
+    userFactory.capturePayment = function ({ prizeId }, data) {
+      console.log({ data })
+      return $http.post("/api/prize/" + prizeId + "/purchase/capture", data);
     };
 
     userFactory.purchases = function (data) {

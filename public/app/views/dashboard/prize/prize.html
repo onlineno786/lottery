@@ -8,14 +8,14 @@
 <div class="col-xl-12 col-md-12 order-xl-1" ng-if="!main.authorized">
 
   <!-- Card -->
-  <div class="dt-card bg-success text-white" ng-if="prize.purchase">
+  <div class="dt-card bg-success text-white" ng-if="prize.successMsg || prize.prize.subscription.length > 0">
 
     <!-- Card Header -->
     <div class="dt-card__header pt-6 px-6 mb-8 pb-5">
 
       <!-- Card Heading -->
       <div class="dt-card__heading">
-        <h3 class="dt-card__title text-white">Congratulations!!!!! You have purchased the ticket. Go to my tickets
+        <h3 class="dt-card__title text-white">Congratulations!!!!! You have purchased the ticket on {{ prize.prize.subscription[0].createdAt | date : 'MMM d, y. h:mm a' }}. Go to my tickets
           section to see your code.</h3>
       </div>
       <!-- /card heading -->
@@ -65,7 +65,7 @@
         </div>
         <!-- /grid item -->
         <!-- Grid Item -->
-        <div class="col-6 text-center">
+        <div class="col-6 text-center" ng-if="prize.prize.subscription.length === 0">
           <div class="mb-3">
             <a href="#" ng-click="prize.purchaseNow()" class="btn btn-secondary btn-xs text-uppercase">Complete the
               purchase now</a>

@@ -139,7 +139,7 @@ angular
 
     function getPrizes() {
       user
-        .getPrizes({ history : true })
+        .getPrizes({ history: true })
         .then((data) => {
           app.loading = false;
           app.prizes = data.data.response.data;
@@ -181,20 +181,91 @@ angular
       .then((data) => {
         app.loading = false;
         app.prize = data.data.response.data[0];
-        console.log(app.prize);
       })
       .catch((error) => {
         app.errorMsg = error.data.response.message;
         app.loading = false;
       });
 
+    function loadScript(src) {
+      return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+          resolve(true);
+        };
+        script.onerror = () => {
+          resolve(false);
+        };
+        document.body.appendChild(script);
+      });
+    }
+
     // purchase
     app.purchaseNow = () => {
       user
         .purchase({ prizeId: $routeParams.prizeId })
-        .then((data) => {
+        .then(async (data) => {
+          console.log(data);
           app.loading = false;
-          app.purchase = data.data.response;
+          app.purchase = data.data.response.data;
+
+          if(app.purchase.razorpay === true) {
+            const res = await loadScript(
+                "https://checkout.razorpay.com/v1/checkout.js"
+            );
+    
+            if (!res) {
+                alert("Razorpay SDK failed to load. Are you online?");
+                return;
+            }
+
+            let order     = app.purchase;
+            let userInfo  = data.data;
+            const options = {
+                key         : "rzp_test_PknDhHwQsvFw8I",
+                amount      : order.amount.toString(),
+                currency    : order.currency,
+                name        : 'Drealfull-fill User',
+                description : order.receipt,
+                order_id    : order.id,
+                handler     : async function (response) {
+                    const resp = {
+                        razorpayPaymentId   : response.razorpay_payment_id,
+                        razorpayOrderId     : response.razorpay_order_id,
+                        razorpaySignature   : response.razorpay_signature,
+                        amount              : order.amount.toString()
+                    };
+
+                    user.capturePayment({ prizeId: $routeParams.prizeId }, resp).then(function(data) {
+                        if(data.data.status) {
+                            // show success message!
+                            app.successMsg = true;
+                        } else {
+                            // show some error message!
+                            app.paymentErrorMsg        = 'Payment failed.';
+                        }
+                    })
+                },
+                prefill     : {
+                    name    : 'Drealfull-fill User',
+                },
+                notes       : {
+                    address : "Dream fullfill",
+                },
+                theme       : {
+                    color   : "#61dafb",
+                },
+            };
+    
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
+
+
+          } else {
+            app.successMsg = 'Congratulations!!!!! You have purchased the ticket. Go to my tickets section to see your code.'
+          }
         })
         .catch((error) => {
           app.errorMsg = error.data.response.message;
@@ -323,9 +394,7 @@ angular
       };
 
       $scope.getIframeSrc = function (code) {
-        let val =
-          "https://nifty-montalcini-2f52c6.netlify.app?answer=" +
-          code;
+        let val = "https://nifty-montalcini-2f52c6.netlify.app?answer=" + code;
         return $sce.trustAsResourceUrl(val);
       };
     }

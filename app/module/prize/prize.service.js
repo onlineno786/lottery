@@ -37,6 +37,39 @@ exports.getPrizes            = (query, callback) => {
     })
 }
 
+// get all prize
+exports.getPrize            = (user, query, callback) => {
+
+    const pipeline  = [
+        {
+            $match  : query
+        },
+        {
+            $lookup             : {
+                from            : 'subscriptions',
+                let             : { 'user' : user._id, 'prize' : query.prizeId },
+                pipeline        : [
+                    {
+                        $match  : {
+                            $expr   : {
+                                $eq         : ['$userId' , '$$user']
+                            }
+                        }
+                    }
+                ],
+                as              : 'subscription'
+            }
+        }
+    ]
+
+    Prize.aggregate(pipeline).exec((error, result) => {
+        if(error) {
+            return callback(errorHelper.findMongoError(error))
+        }
+        return callback(null, result);
+    })
+}
+
 // delete a prize
 exports.deletePrize          = (prizeId, callback) => {
     Prize.findByIdAndRemove(prizeId, (error, result) => {

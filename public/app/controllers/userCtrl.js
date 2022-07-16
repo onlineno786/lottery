@@ -223,7 +223,7 @@ angular
             let order     = app.purchase;
             let userInfo  = data.data;
             const options = {
-                key         : "rzp_test_PknDhHwQsvFw8I",
+                key         : "rzp_live_K8EcbcjMSzgGBf",
                 amount      : order.amount.toString(),
                 currency    : order.currency,
                 name        : 'Drealfull-fill User',
